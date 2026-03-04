@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-upload-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloud-upload
+  template:
+    metadata:
+      labels:
+        app: cloud-upload
+    spec:
+      containers:
+      - name: cloud-upload-container
+        image: 762134991458.dkr.ecr.us-east-1.amazonaws.com/cloud-upload-app:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: YOUR_AWS_ACCESS_KEY
+        - name: AWS_SECRET_ACCESS_KEY
+          value: YOUR_AWS_SECRET_KEY
+        - name: AWS_DEFAULT_REGION
+          value: us-east-1
